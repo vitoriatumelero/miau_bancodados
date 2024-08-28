@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Página Inicial</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/home.css">
 </head>
+<link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
 <body>
-    <div class="container">
-        <h1>Bem-vindo ao MiAu!</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('main.login') }}">Login</a></li>
-                <li><a href="{{ url_for('main.cadastro_perfil') }}">Cadastro de Perfil</a></li>
-                <li><a href="{{ url_for('main.cadastro_ong') }}">Cadastro de ONG</a></li>
-                <li><a href="{{ url_for('main.cadastro_animal') }}">Cadastro de Animal</a></li>
-                <li><a href="{{ url_for('main.listar_animais') }}">Listar Animais</a></li>
-            </ul>
-        </nav>
+    <header class="nav">
+        <ul>
+            <li class="sair"><a href="miau.html">Sair</a></li>
+        </ul>
+    </header>    
+    <div class="Div1">
+        <p> 
+            <img src="../static/img/bemvindo.png" alt="Bem-vindo">
+        </p>
+        <div class="container">
+            <div class="quadro">
+                <h2>Miau!! <br>
+                    Como funciona? <br>
+                    1°passo: Você cria sua conta no aplicativo. <br>
+                    2°passo: Você escolhe se faz parte de uma ONG ou quer adotar. <br>
+                    3°passo: Essa escolha te levará a um cadastro inicial sobre você. <br>
+                    4°passo: Após clicar em criar o perfil, reponda o formulário sobre o que espera do seu futuro animal. (Caso seja ONG, cadastre seus animais)<br>
+                    5°passo: Após o envio do formulário, será redirecionado para a tela principal com os animais mais compativeis.
+                </h2>
+                
+                <button onclick=window.location.href="{{ url_for('main.cadastro_perfil') }}">Quero adotar</button>
+                <button onclick=window.location.href="{{ url_for('main.cadastro_ong') }}">Cuido de ONG</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -5,17 +5,6 @@ body {
     margin: 0; /* Remover margens padrão */
 }
 
-header.nav {
-    background-color: #df87bb;
-    padding: 40px 0; /* Reduzir o preenchimento superior e inferior */
-    margin: 0;
-    width: 100%; /* Ocupar toda a largura da página */
-    top: 0; /* Alinhar o cabeçalho ao topo */
-    left: 0; /* Alinhar o cabeçalho ao lado esquerdo */
-}
-header.nav ul li.sair {
-    margin-left: auto; /* Alinhar à direita */}
-
 header.nav ul {
     list-style-type: none;
     margin: 0;
