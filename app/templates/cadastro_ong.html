@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Compra</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form_ong.css') }}">
+
+</head>
+<body>
+    <div class="content">
+        <h1>Criação do perfil da sua ONG</h1>
+        <form id="form">
+            <div>
+                <input type="text" placeholder="Nome da ONG" class="inputs required">
+            </div>
+            <div>
+                <input type="text" placeholder="Digite o telefone para contato" class="inputs required" >
+            </div>
+            <textarea class="inputs" name="descricao" id="descricao" cols="10" rows="10" placeholder="Fale um pouco sobre sua ong e coloque as redes sociais dela."></textarea>
+            <p>Tem a ong a aproximadamente: </p>
+            <div class="box-select">
+                <div>
+                    <input type="radio" id="m" value="m" name="sexo">
+                    <label for="m">Menos de um ano</label>
+                </div>
+                <div>
+                    <input type="radio" id="f" value="f" name="sexo">
+                    <label for="f">Entre um e dois anos</label>
+                </div>
+                <div>
+                    <input type="radio" id="o" value="o" name="sexo">
+                    <label for="o">Mais de 2 anos</label>
+                </div>
+            </div> 
+            <button type="button" id="enviar">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+    </form>
+    <a href="{{ url_for('main.index') }}">Voltar</a>
+    </div>
+</body>
+</html>

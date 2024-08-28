@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Animais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='listar_animais.css') }}">
+</head>
+<body>
+    <div class="content">
+        <h1>Animais Cadastrados</h1>
+        <ul>
+            {% for animal in animais %}
+                <li>
+                    <h2>{{ animal.nome }}</h2>
+                    <p>Idade: {{ animal.idade }} anos</p>
+                    <p>Espécie: {{ animal.especie }}</p>
+                    <p>Descrição: {{ animal.descricao }}</p>
+                </li>
+            {% else %}
+                <p>Nenhum animal cadastrado até o momento.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

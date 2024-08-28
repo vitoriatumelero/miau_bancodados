@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='miau.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}  <!-- Token CSRF -->
+            <div>
+                <label for="email">Email:</label>
+                {{ form.email(id="email", class="inputs required") }}
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                {{ form.senha(id="senha", class="inputs required") }}
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </div>
+        </form>
+        <p>Não tem uma conta? <a href="{{ url_for('main.cadastro_perfil') }}">Cadastre-se aqui</a></p>
+        <a href="{{ url_for('main.index') }}">Voltar</a>
+    </div>
+</body>
+</html>

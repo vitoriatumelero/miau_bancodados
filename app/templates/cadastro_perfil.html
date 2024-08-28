@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Cliente</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form_perfil.css') }}">
+
+</head>
+<body>
+    <div class="container">
+
+    <h1>Adicionar Cliente</h1>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            <label for="nome">Nome:</label>
+            {{ form.nome(id='nome') }}
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            {{ form.email(id='email') }}
+        </p>
+        <p>
+            <label for="senha">Senha:</label>
+        {{ form.senha(id='senha') }} 
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <a href="{{ url_for('main.index') }}">Voltar</a>
+    </div>
+</body>
+</html>

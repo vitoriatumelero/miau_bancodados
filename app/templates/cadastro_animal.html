@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Animal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_animais.css') }}">
+</head>
+<body>
+    <div class="content">
+        <h1>Cadastrar Animal</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}  <!-- Campo oculto para CSRF protection -->
+            <div>
+                {{ form.nome.label }}
+                {{ form.nome(class="inputs required") }}
+            </div>
+            <div>
+                {{ form.idade.label }}
+                {{ form.idade(class="inputs required") }}
+            </div>
+            <div>
+                {{ form.especie.label }}
+                {{ form.especie(class="inputs required") }}
+            </div>
+            <div>
+                {{ form.descricao.label }}
+                {{ form.descricao(class="inputs") }}
+            </div>
+            <div>
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

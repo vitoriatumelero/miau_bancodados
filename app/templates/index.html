@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao MiAu!</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.login') }}">Login</a></li>
+                <li><a href="{{ url_for('main.cadastro_perfil') }}">Cadastro de Perfil</a></li>
+                <li><a href="{{ url_for('main.cadastro_ong') }}">Cadastro de ONG</a></li>
+                <li><a href="{{ url_for('main.cadastro_animal') }}">Cadastro de Animal</a></li>
+                <li><a href="{{ url_for('main.listar_animais') }}">Listar Animais</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
