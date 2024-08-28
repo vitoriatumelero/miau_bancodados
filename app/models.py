@@ -24,7 +24,7 @@ class Animal(db.Model):
     idade = db.Column(db.Integer, nullable=False)
     especie = db.Column(db.String(50), nullable=False)
     descricao = db.Column(db.String(200), nullable=True)
-    ong_id = db.Column(db.Integer, ForeignKey('ong.id'), nullable=True)  # Defina nullable=True
+    #ong_id = db.Column(db.Integer, ForeignKey('ong.id'))  # Defina nullable=True
     # Remova o relacionamento com Ong
     # ong = relationship('Ong', back_populates='animais')
 

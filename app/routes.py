@@ -5,17 +5,11 @@ from app.models import Perfil, Ong, Animal
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
     return render_template('index.html')
-
-@main.route('/login', methods=['GET', 'POST'])
-@main.route('/login', methods=['GET', 'POST'])
-@main.route('/login', methods=['GET', 'POST'])
-
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
@@ -25,18 +19,15 @@ def login():
         if perfil and check_password_hash(perfil.senha, form.senha.data):
             login_user(perfil)
             flash('Login realizado com sucesso!', 'success')
-            return redirect(url_for('main.index'))  # Redireciona para a página inicial ou outra página
+            return redirect(url_for('main.listar_animais'))
         else:
             flash('Login inválido. Verifique suas credenciais.', 'danger')
     return render_template('login.html', form=form)
-
 
 @main.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
-
-
 
 @main.route('/cadastro_perfil', methods=['GET', 'POST'])
 def cadastro_perfil():
@@ -47,55 +38,53 @@ def cadastro_perfil():
             flash('Este email já está cadastrado. Por favor, faça login.', 'warning')
             return redirect(url_for('main.login'))
 
-        # Hash da senha antes de salvar no banco de dados
         hashed_senha = generate_password_hash(form.senha.data, method='sha256')
-
         novo_perfil = Perfil(
             nome=form.nome.data,
             email=form.email.data,
-            senha=hashed_senha  # Armazena a senha criptografada
+            senha=hashed_senha
         )
-        db.session.add(novo_perfil)
-        db.session.commit()
-        flash('Cadastro realizado com sucesso! Agora você pode fazer login.', 'success')
-        return redirect(url_for('main.login'))
+        try:
+            db.session.add(novo_perfil)
+            db.session.commit()
+            flash('Cadastro realizado com sucesso! Agora você pode fazer login.', 'success')
+            return redirect(url_for('main.login'))
+        except Exception as e:
+            db.session.rollback()  # Reverte a transação em caso de erro
+            flash(f'Erro ao cadastrar perfil: {str(e)}', 'danger')
+    else:
+        flash('Por favor, corrija os erros abaixo.', 'danger')
 
     return render_template('cadastro_perfil.html', form=form)
-
-
 
 @main.route('/cadastro_ong', methods=['GET', 'POST'])
 def cadastro_ong():
     form = CadastroOngForm()
     if form.validate_on_submit():
-        ong = Ong(nome=form.nome.data, email=form.email.data, senha=form.senha.data)
+        ong = Ong(nome=form.nome.data, email=form.email.data, senha=generate_password_hash(form.senha.data, method='sha256'))
         db.session.add(ong)
         db.session.commit()
+        flash('ONG cadastrada com sucesso!', 'success')
         return redirect(url_for('main.index'))
     return render_template('cadastro_ong.html', form=form)
 
-
-@main.route('/cadastrar_animal', methods=['GET', 'POST'])
-@login_required
+@main.route('/cadastro_animal', methods=['GET', 'POST'])
 def cadastro_animal():
     form = CadastroAnimalForm()
     if form.validate_on_submit():
-        # Cria uma instância de Animal com os dados do formulário
         novo_animal = Animal(
             nome=form.nome.data,
             idade=form.idade.data,
             especie=form.especie.data,
-            descricao=form.descricao.data,
-            ong_id=current_user.id  # Exemplo de como vincular o animal à ONG logada
+            descricao=form.descricao.data
         )
         db.session.add(novo_animal)
         db.session.commit()
         flash('Animal cadastrado com sucesso!', 'success')
-        return redirect(url_for('main.listar_animais'))  # Redireciona para a lista de animais
-
-    return render_template('cadastrar_animal.html', form=form)
+        return redirect(url_for('main.listar_animais'))
+    return render_template('cadastro_animal.html', form=form)
 
 @main.route('/listar_animais')
 def listar_animais():
-    animais = Animal.query.all()  # Consulta todos os animais
+    animais = Animal.query.all()
     return render_template('listar_animais.html', animais=animais)
