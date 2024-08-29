@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar perfil</title>
-    <link rel="stylesheet" href="../static/form_perfil.css">
+    <title>Cadastrar Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_perfil.css') }}">
 </head>
-<link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
 <body>
     <div class="content">
-        <h1>Criação do perfil</h1>
-        <form id="form">
+        <h1>Criação do Perfil</h1>
+        <form id="form" method="POST">
             <div>
-                <input type="text" placeholder="Digite seu nome" class="inputs required">
+                <input type="text" name="nome" placeholder="Digite seu nome" class="inputs required" required>
             </div>
             <div>
-                <input type="text" placeholder="Digite seu número de telefone" class="inputs required" >
+                <input type="email" name="email" placeholder="Digite seu email" class="inputs required" required>
             </div>
-            <textarea class="inputs" name="descricao" id="descricao" cols="25" rows="10" placeholder="Fale um pouco sobre você..."></textarea>
+            <div>
+                <input type="password" name="senha" placeholder="Digite sua senha" class="inputs required" required>
+            </div>
             <p>Sexo:</p>
             <div class="box-select">
                 <div>
-                    <input type="radio" id="m" value="m" name="sexo">
+                    <input type="radio" id="m" value="m" name="sexo" required>
                     <label for="m">Masculino</label>
                 </div>
                 <div>
@@ -33,10 +34,10 @@
                     <label for="o">Outro</label>
                 </div>
             </div>
-            <p>Já possui animais de estimação ?</p>
+            <p>Já possui animais de estimação?</p>
             <div class="box-select">
                 <div>
-                    <input type="radio" id="nenhum" value="nenhum" name="quantidade_animais">
+                    <input type="radio" id="nenhum" value="nenhum" name="quantidade_animais" required>
                     <label for="nenhum">Não, nenhum.</label>
                 </div>
                 <div>
@@ -52,41 +53,9 @@
                     <label for="tres">Sim, três ou mais.</label>
                 </div>
             </div>
-            <button type="button" id="enviar">Enviar</button>
+            <textarea class="inputs" name="descricao" id="descricao" cols="25" rows="10" placeholder="Fale um pouco sobre você..." required></textarea>
+            <button type="submit" id="enviar">Enviar</button>
         </form>
     </div>
-    <h1>Adicionar Cliente</h1>
-    <form method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            <label for="nome">Nome:</label>
-            {{ form.nome(id='nome') }}
-        </p>
-        <p>
-            <label for="email">Email:</label>
-            {{ form.email(id='email') }}
-        </p>
-        <p>
-            <label for="senha">Senha:</label>
-        {{ form.senha(id='senha') }} 
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    <a href="{{ url_for('main.index') }}">Voltar</a>
-    </div>
 </body>
-<script>
-    // Captura o formulário e o botão de enviar
-    const form = document.getElementById('form');
-    const enviarButton = document.getElementById('enviar');
-
-    // Adiciona um evento de clique ao botão de enviar
-    enviarButton.addEventListener('click', function(event) {
-        // Evita o comportamento padrão do formulário (recarregar a página)
-        event.preventDefault();
-
-        // Redireciona para a página desejada
-        window.location.href = 'listar_animais.html';
-    });
-</script>
 </html>

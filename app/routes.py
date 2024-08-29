@@ -52,21 +52,24 @@ def cadastro_perfil():
         except Exception as e:
             db.session.rollback()  # Reverte a transação em caso de erro
             flash(f'Erro ao cadastrar perfil: {str(e)}', 'danger')
-    else:
-        flash('Por favor, corrija os erros abaixo.', 'danger')
-
     return render_template('cadastro_perfil.html', form=form)
+
 
 @main.route('/cadastro_ong', methods=['GET', 'POST'])
 def cadastro_ong():
     form = CadastroOngForm()
     if form.validate_on_submit():
         ong = Ong(nome=form.nome.data, email=form.email.data, senha=generate_password_hash(form.senha.data, method='sha256'))
-        db.session.add(ong)
-        db.session.commit()
-        flash('ONG cadastrada com sucesso!', 'success')
-        return redirect(url_for('main.index'))
+        try:
+            db.session.add(ong)
+            db.session.commit()
+            flash('ONG cadastrada com sucesso!', 'success')
+            return redirect(url_for('main.cadastro_animal'))
+        except Exception as e:
+            db.session.rollback()  # Reverte a transação em caso de erro
+            flash(f'Erro ao cadastrar ONG: {str(e)}', 'danger')
     return render_template('cadastro_ong.html', form=form)
+
 
 @main.route('/cadastro_animal', methods=['GET', 'POST'])
 def cadastro_animal():

@@ -32,13 +32,9 @@
                     <label for="o">Mais de 2 anos</label>
                 </div>
             </div> 
-            <button type="button" id="enviar">Enviar</button>
+            <button type="submit" formaction="{{ url_for('main.cadastro_animal') }}" id="enviar">Enviar</button>
             </div>
         </form>
-    </div>
-    <div class="container">
-    </form>
-    <a href="{{ url_for('main.index') }}">Voltar</a>
     </div>
 </body>
 </html>
